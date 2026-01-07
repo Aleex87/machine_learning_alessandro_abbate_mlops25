@@ -25,5 +25,21 @@ async def read_book_by_id(id: int):
 @app.post("/books/create_book")
 async def create_book(book_request: Book):
     new_book = Book.model_validate(book_request)
+
     books.append(new_book)
+
+    # to save / persist data 
+    # ex logic foe writing to json (in append mode)
+    # ex  open up a database connection and Insert row
+
+ 
     return new_book
+
+#  ----------------- UPDATE --------------------
+
+@app.put("/books/update_book")
+async def update_book(update_book: Book):
+    for i , book in enumerate(books):
+        if book.id == update_book.id:
+            books[i] = update_book
+    return update_book
